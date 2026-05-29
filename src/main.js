@@ -49,7 +49,7 @@ const {
 } = require("./session-focus");
 const { focusCodexThreadTarget } = require("./session-focus-handoff");
 const { getAllAgents } = require("../agents/registry");
-const { setupFileDropHandler, setupVoiceAssistant, injectEnhancementsIntoWindow } = require("./enhancements");
+const { setupCameraPermissions, setupFileDropHandler, setupVoiceAssistant, injectEnhancementsIntoWindow } = require("./enhancements");
 
 // ── Autoplay policy: allow sound playback without user gesture ──
 // MUST be set before any BrowserWindow is created (before app.whenReady)
@@ -2581,6 +2581,7 @@ function createWindow() {
   });
 
   // ── Setup Enhancements ──
+  setupCameraPermissions();
   const enhancementCtx = {
     showBubble: (msg) => console.log("[bubble]", msg),
   };
