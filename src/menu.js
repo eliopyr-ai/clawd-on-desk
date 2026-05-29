@@ -152,6 +152,10 @@ module.exports = function initMenu(ctx) {
         },
       );
     }
+    // ── Enhanced Features ──
+    const { buildEnhancedMenuItems } = require("./enhancements");
+    items.push(...buildEnhancedMenuItems(ctx, t));
+
     items.push(
       { type: "separator" },
       {
@@ -359,6 +363,10 @@ module.exports = function initMenu(ctx) {
         },
       );
     }
+    // ── Enhanced Features ──
+    const { buildEnhancedMenuItems } = require("./enhancements");
+    template.push(...buildEnhancedMenuItems(ctx, t));
+
     template.push(
       { type: "separator" },
       {

@@ -49,6 +49,7 @@ const {
 } = require("./session-focus");
 const { focusCodexThreadTarget } = require("./session-focus-handoff");
 const { getAllAgents } = require("../agents/registry");
+const { setupFileDropHandler, setupVoiceAssistant, injectEnhancementsIntoWindow } = require("./enhancements");
 
 // ── Autoplay policy: allow sound playback without user gesture ──
 // MUST be set before any BrowserWindow is created (before app.whenReady)
@@ -2578,6 +2579,13 @@ function createWindow() {
     ipcMain,
     updateBubble: _updateBubble,
   });
+
+  // ── Setup Enhancements ──
+  const enhancementCtx = {
+    showBubble: (msg) => console.log("[bubble]", msg),
+  };
+  setupFileDropHandler(enhancementCtx);
+  setupVoiceAssistant(enhancementCtx);
 
   initFocusHelper();
   startMainTick();

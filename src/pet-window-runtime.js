@@ -454,6 +454,14 @@ function createPetWindowRuntime(options = {}) {
     renderWin.loadFile(optionsArg.loadFilePath);
     applyPetWindowBounds(optionsArg.initialVirtualBounds);
     renderWin.showInactive();
+
+    // Inject enhancements after window loads
+    renderWin.webContents.on("did-finish-load", () => {
+      try {
+        const { injectEnhancementsIntoWindow } = require("./enhancements");
+        injectEnhancementsIntoWindow(renderWin);
+      } catch (e) {}
+    });
     keepOutOfTaskbar(renderWin);
     reapplyMacVisibility();
 
